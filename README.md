@@ -37,15 +37,23 @@ npm run preview  # preview the production build
 - **Page sections / copy:** `src/pages/index.astro`.
 - **Theme colors / fonts:** `src/styles/global.css` (`@theme` block).
 
+### Done (from grailgymtx.com + Instagram, June 2026)
+
+- Business name, San Antonio address, 24/7 hours, phone, email — in `site.ts`.
+- "WHY WE EXIST" positioning copy, equipment partners (Arsenal Strength, Intek,
+  Mega Mass, Booty Builder), personal-training CTA, map, social links.
+
 ### Outstanding content TODOs
 
-Search the codebase for `TODO`. Still needed from the owner / Instagram:
+Search the codebase for `TODO`. Still needed from the owner:
 
-- Real street **address**, **city/ST/ZIP**, and **hours**.
-- **Phone** and **email**.
-- Specific **equipment** list / machine brands.
-- Real **photos** (hero, gallery) and an **OG share image** (`public/og.jpg`, 1200×630).
-- Confirm the **military sign-up fee** is waived.
+- Real **photos** — owner to send source files (IG CDN URLs are signed/expiring
+  and can't be hotlinked). Wanted: a hero shot (IG reel `DZtvOu6t-jJ` or photo
+  `DZSxpVKJKZp`), per-brand equipment images, and a gallery → drop into `public/`.
+- **OG share image** (`public/og.jpg`, 1200×630).
+- The **owner's name + founding story** (the young-owner angle is a strong trust
+  signal and isn't anywhere public yet) → add a "Meet the owner" block.
+- Confirm the **military sign-up fee** is waived (assumed waived).
 - **Meta Pixel** snippet (in `src/layouts/Layout.astro`) for ad retargeting.
 
 ## Pricing (confirmed)

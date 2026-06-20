@@ -8,9 +8,29 @@ interface Props {
 }
 
 const {
-  title = `${site.name} — ${site.tagline}`,
-  description = `${site.name} is a strength-first gym in ${site.location}. Founding Members lock in the lowest price we'll ever offer — before we expand.`,
+  title = `${site.name} — 24/7 Strength Gym in ${site.cityState}`,
+  description = `${site.name} is a 24/7 bodybuilding gym in ${site.region}. Commercial-grade machines, no big-box crowds. Founding Members lock in the lowest price we'll ever offer — before we expand.`,
 } = Astro.props;
+
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HealthClub",
+  name: site.name,
+  description,
+  url: Astro.site?.href,
+  telephone: site.phone,
+  email: site.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.state,
+    postalCode: site.address.zip,
+    addressCountry: "US",
+  },
+  openingHours: "Mo-Su 00:00-23:59",
+  sameAs: [site.instagram, site.facebook],
+};
 ---
 
 <!doctype html>
@@ -37,6 +57,12 @@ const {
     <link
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+    />
+
+    <!-- Local business structured data (helps Google Maps / local SEO) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(businessSchema)}
     />
 
     <!-- TODO: paste Meta Pixel here for the founding-members ad retargeting -->
