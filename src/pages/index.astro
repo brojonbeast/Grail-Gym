@@ -1,0 +1,350 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { site, pricing } from "../data/site";
+
+const money = (n: number) =>
+  n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`;
+---
+
+<Layout>
+  <!-- ===================== NAV ===================== -->
+  <header
+    class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-grail-ink/80 backdrop-blur"
+  >
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <a href="#top" class="font-display text-xl font-bold tracking-wide">
+        GRAIL<span class="text-grail-gold">GYM</span>
+      </a>
+      <div class="hidden items-center gap-8 text-sm font-medium text-grail-fog md:flex">
+        <a href="#founding" class="transition hover:text-white">Founding Members</a>
+        <a href="#equipment" class="transition hover:text-white">The Floor</a>
+        <a href="#pricing" class="transition hover:text-white">Pricing</a>
+        <a href="#faq" class="transition hover:text-white">FAQ</a>
+      </div>
+      <a
+        href={site.joinUrl}
+        class="rounded-md bg-grail-gold px-4 py-2 text-sm font-bold text-grail-ink transition hover:bg-grail-gold-bright"
+      >
+        Join Now
+      </a>
+    </nav>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section
+    id="top"
+    class="relative flex min-h-screen items-center overflow-hidden pt-20"
+  >
+    <!-- TODO: drop a real hero photo from Instagram into public/hero.jpg -->
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-grail-charcoal via-grail-ink to-grail-ink"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute -top-40 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-grail-gold/10 blur-3xl"
+    >
+    </div>
+
+    <div class="relative mx-auto w-full max-w-6xl px-5 py-20">
+      <span
+        class="inline-flex items-center gap-2 rounded-full border border-grail-gold/40 bg-grail-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-grail-gold"
+      >
+        ● Founding Members — now open
+      </span>
+      <h1
+        class="font-display mt-6 max-w-3xl text-5xl font-bold leading-[1.05] sm:text-6xl md:text-7xl"
+      >
+        Get in before<br />the legend is built.
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-grail-fog">
+        Premium strength machines and a full dumbbell range — this is just the
+        beginning. {site.name} is growing, and Founding Members lock in the
+        lowest price we will ever offer.
+      </p>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a
+          href={site.joinUrl}
+          class="rounded-md bg-grail-gold px-7 py-3.5 text-center font-bold text-grail-ink transition hover:bg-grail-gold-bright"
+        >
+          Become a Founding Member
+        </a>
+        <a
+          href="#pricing"
+          class="rounded-md border border-white/15 px-7 py-3.5 text-center font-semibold text-white transition hover:border-white/40"
+        >
+          See Pricing
+        </a>
+      </div>
+      <p class="mt-5 text-sm text-grail-fog">
+        From <span class="font-bold text-white">$40/mo</span> paid in full · Military
+        from <span class="font-bold text-white">$30/mo</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== WHY NOW (FOUNDING) ===================== -->
+  <section id="founding" class="border-t border-white/5 py-24">
+    <div class="mx-auto max-w-6xl px-5">
+      <h2 class="font-display text-3xl font-bold sm:text-4xl">
+        Why get in <span class="text-grail-gold">now</span>?
+      </h2>
+      <p class="mt-4 max-w-2xl text-grail-fog">
+        We didn't cut corners on the equipment, and we're not done. As we add
+        more machines and cardio, the price goes up. Founding Members get in at
+        the ground floor — and stay there.
+      </p>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        <div class="rounded-xl border border-white/10 bg-grail-charcoal p-7">
+          <div class="font-display text-4xl font-bold text-grail-gold">01</div>
+          <h3 class="mt-4 text-lg font-bold">Lock the lowest price</h3>
+          <p class="mt-2 text-sm text-grail-fog">
+            Prices rise as the gym grows. Join now and your founding rate is
+            your rate. Reward for believing early.
+          </p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-grail-charcoal p-7">
+          <div class="font-display text-4xl font-bold text-grail-gold">02</div>
+          <h3 class="mt-4 text-lg font-bold">Real, quality iron</h3>
+          <p class="mt-2 text-sm text-grail-fog">
+            Serious strength-training machines and a full dumbbell range — built
+            to train hard on from day one, not a budget starter set.
+          </p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-grail-charcoal p-7">
+          <div class="font-display text-4xl font-bold text-grail-gold">03</div>
+          <h3 class="mt-4 text-lg font-bold">Grow with us</h3>
+          <p class="mt-2 text-sm text-grail-fog">
+            More machines and cardio are on the way. Founding Members are part
+            of the build — you helped make this place what it becomes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EQUIPMENT / THE FLOOR ===================== -->
+  <section id="equipment" class="border-t border-white/5 py-24">
+    <div class="mx-auto max-w-6xl px-5">
+      <h2 class="font-display text-3xl font-bold sm:text-4xl">The floor</h2>
+      <p class="mt-4 max-w-2xl text-grail-fog">
+        Everything you need to get strong is already here. <!-- TODO: replace with
+        the real equipment list / brands from Instagram. -->
+      </p>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-xl border border-white/10 bg-grail-charcoal p-7">
+          <h3 class="text-lg font-bold">Strength machines</h3>
+          <p class="mt-2 text-sm text-grail-fog">
+            Quality plate-loaded and selectorized machines for every major lift.
+            <!-- TODO: list specific machines/brands. -->
+          </p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-grail-charcoal p-7">
+          <h3 class="text-lg font-bold">Full dumbbell range</h3>
+          <p class="mt-2 text-sm text-grail-fog">
+            A complete dumbbell set with benches — go from warm-up to working
+            sets without waiting. <!-- TODO: confirm weight range. -->
+          </p>
+        </div>
+        <div
+          class="relative rounded-xl border border-dashed border-grail-gold/40 bg-grail-gold/5 p-7"
+        >
+          <span
+            class="absolute right-5 top-5 rounded-full bg-grail-gold px-2.5 py-1 text-xs font-bold text-grail-ink"
+            >Coming soon</span
+          >
+          <h3 class="text-lg font-bold">Cardio</h3>
+          <p class="mt-2 text-sm text-grail-fog">
+            Cardio equipment is on the way — another reason today's price won't
+            last.
+          </p>
+        </div>
+      </div>
+      <!-- TODO: add a photo gallery here sourced from @grailgym. -->
+    </div>
+  </section>
+
+  <!-- ===================== PRICING ===================== -->
+  <section id="pricing" class="border-t border-white/5 py-24">
+    <div class="mx-auto max-w-6xl px-5">
+      <div class="text-center">
+        <h2 class="font-display text-3xl font-bold sm:text-4xl">
+          Founding Member pricing
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-grail-fog">
+          Simple and honest. Pay monthly, or pay the year in full and save.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-6 lg:grid-cols-2">
+        <!-- Month to month -->
+        <div class="flex flex-col rounded-2xl border border-white/10 bg-grail-charcoal p-8">
+          <h3 class="font-display text-2xl font-bold">{pricing.monthToMonth.label}</h3>
+          <div class="mt-4 flex items-end gap-1">
+            <span class="font-display text-5xl font-bold"
+              >{money(pricing.monthToMonth.price)}</span
+            >
+            <span class="mb-1.5 text-grail-fog">{pricing.monthToMonth.period}</span>
+          </div>
+          <p class="mt-2 text-sm text-grail-fog">{pricing.monthToMonth.note}</p>
+          <ul class="mt-6 space-y-2 text-sm text-grail-fog">
+            <li>✓ Full access to all equipment</li>
+            <li>✓ Founding-rate locked while you stay</li>
+            <li>✓ Cancel anytime</li>
+          </ul>
+          <a
+            href={site.joinUrl}
+            class="mt-8 rounded-md border border-white/15 px-6 py-3 text-center font-semibold transition hover:border-white/40"
+            >Start month-to-month</a
+          >
+        </div>
+
+        <!-- Paid in full — featured -->
+        <div
+          class="relative flex flex-col rounded-2xl border-2 border-grail-gold bg-gradient-to-b from-grail-gold/10 to-grail-charcoal p-8"
+        >
+          <span
+            class="absolute -top-3 left-8 rounded-full bg-grail-gold px-3 py-1 text-xs font-bold uppercase tracking-wide text-grail-ink"
+            >Best value</span
+          >
+          <h3 class="font-display text-2xl font-bold">{pricing.paidInFull.label}</h3>
+          <div class="mt-4 flex items-end gap-1">
+            <span class="font-display text-5xl font-bold text-grail-gold"
+              >{money(pricing.paidInFull.price)}</span
+            >
+            <span class="mb-1.5 text-grail-fog">{pricing.paidInFull.period}</span>
+          </div>
+          <p class="mt-2 text-sm font-semibold text-grail-gold">
+            That's just {money(pricing.paidInFull.effectiveMonthly)}/mo — and no sign-up fee.
+          </p>
+          <div class="mt-5 rounded-lg border border-grail-gold/30 bg-grail-ink/40 p-4 text-sm">
+            <p class="font-bold text-white">
+              Save {money(pricing.paidInFull.savingsWithSignup)} in year one
+            </p>
+            <p class="mt-1 text-grail-fog">
+              vs. {money(pricing.monthToMonth.price)}/mo ({money(
+                pricing.monthToMonth.price * 12
+              )} in dues) plus the {money(pricing.monthToMonth.signupFee)} sign-up fee.
+            </p>
+          </div>
+          <ul class="mt-6 space-y-2 text-sm text-grail-fog">
+            <li>✓ Everything in month-to-month</li>
+            <li>✓ Sign-up fee waived</li>
+            <li>✓ Lowest effective rate we offer</li>
+          </ul>
+          <a
+            href={site.joinUrl}
+            class="mt-8 rounded-md bg-grail-gold px-6 py-3 text-center font-bold text-grail-ink transition hover:bg-grail-gold-bright"
+            >Pay the year in full</a
+          >
+        </div>
+      </div>
+
+      <!-- Military -->
+      <div
+        class="mt-6 grid gap-6 rounded-2xl border border-white/10 bg-grail-charcoal p-8 sm:grid-cols-[1fr_auto] sm:items-center"
+      >
+        <div>
+          <h3 class="font-display text-xl font-bold">
+            Military <span class="text-grail-gold">— thank you for your service</span>
+          </h3>
+          <p class="mt-2 text-sm text-grail-fog">
+            Active duty &amp; veterans: {money(pricing.military.price)}/mo, or pay
+            the year in full for {money(pricing.militaryPaidInFull.price)}
+            (just {money(pricing.militaryPaidInFull.effectiveMonthly)}/mo) — sign-up
+            fee waived. <!-- TODO: confirm whether signup fee is waived for military. -->
+          </p>
+        </div>
+        <a
+          href={site.joinUrl}
+          class="rounded-md border border-grail-gold/50 px-6 py-3 text-center font-bold text-grail-gold transition hover:bg-grail-gold hover:text-grail-ink"
+          >Claim military rate</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section id="faq" class="border-t border-white/5 py-24">
+    <div class="mx-auto max-w-3xl px-5">
+      <h2 class="font-display text-3xl font-bold sm:text-4xl">Questions</h2>
+      <div class="mt-10 space-y-4">
+        <details class="group rounded-xl border border-white/10 bg-grail-charcoal p-6">
+          <summary class="cursor-pointer list-none font-semibold marker:hidden">
+            What's the catch with "founding member" pricing?
+          </summary>
+          <p class="mt-3 text-sm text-grail-fog">
+            No catch. We're a growing gym. As we add more machines and cardio,
+            our prices will go up — but your founding rate stays locked while
+            your membership is active.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-white/10 bg-grail-charcoal p-6">
+          <summary class="cursor-pointer list-none font-semibold marker:hidden">
+            Is there cardio equipment?
+          </summary>
+          <p class="mt-3 text-sm text-grail-fog">
+            Not yet — it's on the way. Right now the floor is built around
+            serious strength training: quality machines and a full dumbbell
+            range.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-white/10 bg-grail-charcoal p-6">
+          <summary class="cursor-pointer list-none font-semibold marker:hidden">
+            How do I sign up?
+          </summary>
+          <p class="mt-3 text-sm text-grail-fog">
+            Hit any “Join” button — it takes you straight to our member portal
+            to pick your plan and get started.
+          </p>
+        </details>
+        <!-- TODO: add hours / location / day-pass / age-policy FAQs once confirmed. -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section class="border-t border-white/5 py-24">
+    <div class="mx-auto max-w-4xl px-5 text-center">
+      <h2 class="font-display text-4xl font-bold sm:text-5xl">
+        The price only goes up from here.
+      </h2>
+      <p class="mx-auto mt-5 max-w-xl text-grail-fog">
+        Be one of the names that was here first. Lock your founding rate today.
+      </p>
+      <a
+        href={site.joinUrl}
+        class="mt-9 inline-block rounded-md bg-grail-gold px-9 py-4 font-bold text-grail-ink transition hover:bg-grail-gold-bright"
+      >
+        Become a Founding Member
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="border-t border-white/5 py-12">
+    <div
+      class="mx-auto flex max-w-6xl flex-col gap-6 px-5 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <div>
+        <p class="font-display text-lg font-bold">
+          GRAIL<span class="text-grail-gold">GYM</span>
+        </p>
+        <p class="mt-1 text-sm text-grail-fog">
+          {site.location} · {site.hours}
+          <!-- TODO: real address + hours -->
+        </p>
+      </div>
+      <div class="flex items-center gap-6 text-sm text-grail-fog">
+        <a href={site.instagram} class="transition hover:text-white"
+          >Instagram {site.instagramHandle}</a
+        >
+        <a href={site.joinUrl} class="transition hover:text-white">Member Portal</a>
+      </div>
+    </div>
+    <p class="mt-8 text-center text-xs text-grail-fog/60">
+      © {new Date().getFullYear()} {site.name}. All rights reserved.
+    </p>
+  </footer>
+</Layout>
