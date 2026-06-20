@@ -29,6 +29,7 @@ export const site = {
   trainingFormUrl:
     "https://docs.google.com/forms/d/e/1FAIpQLSfLzTHD30O_6iQo3JVp3Khf5bVm6EQLHJ-CaUGJ2XfgcatM1w/viewform",
   tagline: "Serious iron. No crowds. Open 24/7.",
+  owner: "Hunter",
   // Verbatim positioning copy from grailgymtx.com — keep this voice.
   whyWeExist:
     "We are a bodybuilding startup committed to bringing global equipment standards to southeast San Antonio. Grail Gym is focused on providing high-quality machines and a raw environment for athletes who demand the absolute best from their training space. Built for serious lifters, Grail Gym delivers commercial-grade bodybuilding equipment, a motivating atmosphere, and 24/7 access without the crowds of big-box gyms.",

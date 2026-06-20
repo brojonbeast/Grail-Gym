@@ -19,6 +19,7 @@ const money = (n: number) => (n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`);
       </a>
       <div class="hidden items-center gap-8 text-sm font-medium text-grail-fog md:flex">
         <a href="#why" class="transition hover:text-white">Why Grail</a>
+        <a href="#story" class="transition hover:text-white">Story</a>
         <a href="#equipment" class="transition hover:text-white">Equipment</a>
         <a href="#pricing" class="transition hover:text-white">Pricing</a>
         <a href="#training" class="transition hover:text-white">Training</a>
@@ -119,6 +120,52 @@ const money = (n: number) => (n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`);
             grows, prices go up. Founding Members keep their rate.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOUNDER / STORY ===================== -->
+  <section id="story" class="border-t border-white/5 py-24">
+    <div class="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[1fr_1.2fr] md:items-center">
+      <!-- TODO: add a real photo of Hunter (public/hunter.jpg). Good source:
+           opening-day reel DZBPtHjP8hF or the PT reel DZtvOu6t-jJ. -->
+      <div
+        class="relative flex aspect-[4/5] items-end overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-grail-steel to-grail-charcoal p-6"
+      >
+        <div
+          class="pointer-events-none absolute -top-16 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-grail-gold/10 blur-3xl"
+        >
+        </div>
+        <p class="relative font-display text-2xl font-bold leading-tight">
+          {site.owner}<span class="text-grail-gold">.</span><br />
+          <span class="text-base font-medium text-grail-fog">Founder</span>
+        </p>
+      </div>
+
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-grail-gold"
+          >Meet the founder</span
+        >
+        <h2 class="font-display mt-4 text-3xl font-bold sm:text-4xl">
+          Built by a lifter who always wanted his own gym.
+        </h2>
+        <p class="mt-5 text-grail-fog">
+          {site.owner} is a young guy who's wanted to open a gym for as long as he
+          can remember. Instead of waiting around for a big, polished grand
+          opening, he chose to open the doors now — and invite people in to train,
+          support it, and experience it while it grows.
+        </p>
+        <p class="mt-4 text-grail-fog">
+          That's the whole idea behind the founding rate: get in early, lock in
+          the lowest price {site.name} will ever offer, and come along for the
+          ride as {site.owner} adds more machines, more equipment, and cardio. The
+          people here now aren't just members — they're part of building the place.
+        </p>
+        <blockquote
+          class="mt-7 border-l-2 border-grail-gold pl-5 font-display text-xl leading-snug"
+        >
+          “Be part of it while I'm building it.”
+        </blockquote>
       </div>
     </div>
   </section>
