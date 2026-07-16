@@ -2,19 +2,48 @@
 
 /* ----------------------------------------------------------------------------
    Grail Gym brand theme
-   "Grail" = the prize worth chasing. Dark, heavy, premium — with a gold accent
-   that nods to the chalice. Tweak the palette here once and it flows everywhere.
+   One solid background. Sections sit on it as raised cards. No gradients,
+   no glass, no blur. Gold accent pulled from the logo. Proxima Nova only.
 ---------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNovaRegular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNovaBold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNovaBlack.woff") format("woff");
+  font-weight: 800 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-grail-gold: #d4af37;
   --color-grail-gold-bright: #f4cf5a;
+  /* The one solid page background. */
   --color-grail-ink: #0a0a0b;
-  --color-grail-charcoal: #151517;
-  --color-grail-steel: #232327;
-  --color-grail-fog: #a1a1aa;
+  /* Card surface that "hovers" above the background. */
+  --color-grail-card: #17171a;
+  --color-grail-card-edge: #2a2a2f;
+  --color-grail-fog: #a6a6ad;
 
-  --font-display: "Oswald", "Arial Narrow", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --font-display: "Proxima Nova", system-ui, -apple-system, sans-serif;
+  --font-body: "Proxima Nova", system-ui, -apple-system, sans-serif;
+
+  /* Buttons are 2px by spec. Cards stay subtle. */
+  --radius-btn: 2px;
+  --radius-card: 6px;
 }
 
 html {
@@ -27,10 +56,45 @@ body {
   color: #ededed;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Reusable display/heading treatment */
+/* Headings: Proxima Nova Black */
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: 0.01em;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+/* Raised card: solid surface, hard edge, real shadow. No transparency. */
+.card {
+  background-color: var(--color-grail-card);
+  border: 1px solid var(--color-grail-card-edge);
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+/* Buttons: 2px corners, solid fills only. */
+.btn {
+  display: inline-block;
+  border-radius: var(--radius-btn);
+  font-weight: 700;
+  text-align: center;
+  transition: background-color 150ms ease, color 150ms ease,
+    border-color 150ms ease;
+}
+.btn-gold {
+  background-color: var(--color-grail-gold);
+  color: var(--color-grail-ink);
+}
+.btn-gold:hover {
+  background-color: var(--color-grail-gold-bright);
+}
+.btn-outline {
+  border: 1px solid #3f3f46;
+  color: #ffffff;
+}
+.btn-outline:hover {
+  border-color: var(--color-grail-gold);
+  color: var(--color-grail-gold);
 }

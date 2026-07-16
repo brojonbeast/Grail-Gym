@@ -3,504 +3,521 @@ import Layout from "../layouts/Layout.astro";
 import { site, pricing, equipmentBrands } from "../data/site";
 
 const money = (n: number) => (n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`);
+
+const faqs = [
+  {
+    q: "Where is Grail Gym located?",
+    a: `Grail Gym is at ${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.zip}, in southeast San Antonio off Rigsby Ave.`,
+  },
+  {
+    q: "Is Grail Gym open 24 hours?",
+    a: "Yes. Members have 24/7 access through the GymMaster door system and app. Day passes are valid on the day of purchase.",
+  },
+  {
+    q: "How much does a membership cost?",
+    a: `Month to month is ${money(pricing.monthToMonth.price)} per month with a ${money(pricing.monthToMonth.signupFee)} one-time signup fee. Six months paid in full is ${money(pricing.sixMonth.price)}. A year paid in full is ${money(pricing.paidInFull.price)}, which works out to ${money(pricing.paidInFull.effectiveMonthly)} per month. Prices are before sales tax.`,
+  },
+  {
+    q: "Is there a military discount?",
+    a: `Yes. Active duty and veterans pay ${money(pricing.military.price)} per month, or ${money(pricing.militaryPaidInFull.price)} for a full year, which works out to ${money(pricing.militaryPaidInFull.effectiveMonthly)} per month. The signup fee is waived.`,
+  },
+  {
+    q: "Can I try the gym without a membership?",
+    a: `Yes. A day pass is ${money(pricing.dayPass.price)} and is valid on the day of purchase.`,
+  },
+  {
+    q: "What equipment does Grail Gym have?",
+    a: `Commercial-grade machines from ${equipmentBrands.join(", ")}, plus power racks, Olympic benches, and a full dumbbell range. Cardio equipment is being added.`,
+  },
+  {
+    q: "How do I sign up?",
+    a: "Sign up online through the member portal, or come by the gym. Every plan on this page links straight to the portal.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 ---
 
 <Layout>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
   <!-- ===================== NAV ===================== -->
-  <header
-    class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-grail-ink/80 backdrop-blur"
-  >
-    <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-      <a href="#top" class="font-display text-xl font-bold tracking-wide">
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-grail-card-edge bg-grail-ink">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+      <a href="#top" class="font-display text-xl tracking-wide">
         GRAIL<span class="text-grail-gold">GYM</span>
-        <span class="ml-2 hidden text-xs font-medium tracking-widest text-grail-fog sm:inline"
+        <span class="ml-2 hidden text-xs font-normal tracking-widest text-grail-fog md:inline"
           >SAN ANTONIO, TX</span
         >
       </a>
-      <div class="hidden items-center gap-8 text-sm font-medium text-grail-fog md:flex">
-        <a href="#why" class="transition hover:text-white">Why Grail</a>
-        <a href="#story" class="transition hover:text-white">Story</a>
+      <div class="hidden items-center gap-7 text-sm text-grail-fog lg:flex">
+        <a href="#about" class="transition hover:text-white">About</a>
         <a href="#equipment" class="transition hover:text-white">Equipment</a>
         <a href="#pricing" class="transition hover:text-white">Pricing</a>
         <a href="#training" class="transition hover:text-white">Training</a>
-        <a href="#visit" class="transition hover:text-white">Visit</a>
+        <a href="#location" class="transition hover:text-white">Location</a>
+        <a href="#faq" class="transition hover:text-white">FAQ</a>
       </div>
-      <a
-        href={site.joinUrl}
-        class="rounded-md bg-grail-gold px-4 py-2 text-sm font-bold text-grail-ink transition hover:bg-grail-gold-bright"
-      >
-        Join Now
-      </a>
+      <a href={site.joinUrl} class="btn btn-gold px-4 py-2 text-sm">Join Now</a>
     </nav>
   </header>
 
   <!-- ===================== HERO ===================== -->
   <section
     id="top"
-    class="relative flex min-h-screen items-center overflow-hidden pt-20"
+    class="flex min-h-svh items-center pt-16 lg:h-screen lg:min-h-0"
   >
-    <!-- TODO: drop a real interior/owner photo behind this (public/hero.jpg).
-         Best source: still from IG reel DZtvOu6t-jJ or photo DZSxpVKJKZp. -->
     <div
-      class="absolute inset-0 bg-gradient-to-b from-grail-charcoal via-grail-ink to-grail-ink"
+      class="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16"
     >
-    </div>
-    <div
-      class="pointer-events-none absolute -top-40 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-grail-gold/10 blur-3xl"
-    >
-    </div>
-
-    <div class="relative mx-auto w-full max-w-6xl px-5 py-20">
-      <span
-        class="inline-flex items-center gap-2 rounded-full border border-grail-gold/40 bg-grail-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-grail-gold"
-      >
-        ● Now open · Limited founding memberships
-      </span>
-      <h1
-        class="font-display mt-6 max-w-3xl text-5xl font-bold leading-[1.05] sm:text-6xl md:text-7xl"
-      >
-        Serious iron.<br />No crowds. Open 24/7.
-      </h1>
-      <p class="mt-6 max-w-xl text-lg text-grail-fog">
-        A new bodybuilding gym in southeast San Antonio with commercial-grade
-        machines and a raw place to train. This is just the start — and Founding
-        Members lock in the lowest price we will ever offer.
-      </p>
-      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-        <a
-          href={site.joinUrl}
-          class="rounded-md bg-grail-gold px-7 py-3.5 text-center font-bold text-grail-ink transition hover:bg-grail-gold-bright"
-        >
-          Become a Founding Member
-        </a>
-        <a
-          href="#pricing"
-          class="rounded-md border border-white/15 px-7 py-3.5 text-center font-semibold text-white transition hover:border-white/40"
-        >
-          See Pricing
-        </a>
-      </div>
-      <p class="mt-5 text-sm text-grail-fog">
-        From <span class="font-bold text-white">$40/mo</span> paid in full · Military
-        from <span class="font-bold text-white">$30/mo</span> · {site.address.street.split(",")[0]},
-        SATX
-      </p>
-    </div>
-  </section>
-
-  <!-- ===================== WHY WE EXIST ===================== -->
-  <section id="why" class="border-t border-white/5 py-24">
-    <div class="mx-auto max-w-6xl px-5">
-      <span class="text-xs font-semibold uppercase tracking-widest text-grail-gold"
-        >Why we exist</span
-      >
-      <p class="mt-5 max-w-3xl font-display text-2xl leading-snug sm:text-3xl">
-        {site.whyWeExist}
-      </p>
-
-      <div class="mt-14 grid gap-6 md:grid-cols-3">
-        <div class="rounded-xl border border-white/10 bg-grail-charcoal p-7">
-          <h3 class="text-lg font-bold">Commercial-grade only</h3>
-          <p class="mt-2 text-sm text-grail-fog">
-            We didn't cut corners. Real machines from {equipmentBrands.join(", ")}
-            — built to train hard on from day one.
-          </p>
-        </div>
-        <div class="rounded-xl border border-white/10 bg-grail-charcoal p-7">
-          <h3 class="text-lg font-bold">24/7, no crowds</h3>
-          <p class="mt-2 text-sm text-grail-fog">
-            Member access around the clock through the GymMaster door system.
-            Train on your schedule, without the big-box wait.
-          </p>
-        </div>
-        <div class="rounded-xl border border-white/10 bg-grail-charcoal p-7">
-          <h3 class="text-lg font-bold">Get in early</h3>
-          <p class="mt-2 text-sm text-grail-fog">
-            We're adding more machines — and cardio is on the way. As the gym
-            grows, prices go up. Founding Members keep their rate.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== FOUNDER / STORY ===================== -->
-  <section id="story" class="border-t border-white/5 py-24">
-    <div class="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[1fr_1.2fr] md:items-center">
-      <!-- TODO: add a real photo of Hunter (public/hunter.jpg). Good source:
-           opening-day reel DZBPtHjP8hF or the PT reel DZtvOu6t-jJ. -->
-      <div
-        class="relative flex aspect-[4/5] items-end overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-grail-steel to-grail-charcoal p-6"
-      >
-        <div
-          class="pointer-events-none absolute -top-16 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-grail-gold/10 blur-3xl"
-        >
-        </div>
-        <p class="relative font-display text-2xl font-bold leading-tight">
-          {site.owner}<span class="text-grail-gold">.</span><br />
-          <span class="text-base font-medium text-grail-fog">Founder</span>
-        </p>
-      </div>
-
       <div>
-        <span class="text-xs font-semibold uppercase tracking-widest text-grail-gold"
-          >Meet the founder</span
+        <p
+          class="inline-block border border-grail-card-edge px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-grail-gold"
         >
-        <h2 class="font-display mt-4 text-3xl font-bold sm:text-4xl">
-          Built by a lifter who always wanted his own gym.
-        </h2>
-        <p class="mt-5 text-grail-fog">
-          {site.owner} is a young guy who's wanted to open a gym for as long as he
-          can remember. Instead of waiting around for a big, polished grand
-          opening, he chose to open the doors now — and invite people in to train,
-          support it, and experience it while it grows.
+          Now open at 4654 Rigsby Ave
         </p>
-        <p class="mt-4 text-grail-fog">
-          That's the whole idea behind the founding rate: get in early, lock in
-          the lowest price {site.name} will ever offer, and come along for the
-          ride as {site.owner} adds more machines, more equipment, and cardio. The
-          people here now aren't just members — they're part of building the place.
-        </p>
-        <blockquote
-          class="mt-7 border-l-2 border-grail-gold pl-5 font-display text-xl leading-snug"
+        <h1
+          class="font-display mt-5 text-4xl leading-[1.02] sm:text-6xl lg:text-7xl"
         >
-          “Be part of it while I'm building it.”
-        </blockquote>
+          A 24 hour bodybuilding gym in San Antonio, Texas.
+        </h1>
+        <p class="mt-6 max-w-xl text-base text-grail-fog sm:text-lg">
+          {site.name} is a strength and bodybuilding gym in southeast San
+          Antonio. Commercial-grade machines, 24/7 member access, and room to
+          train. Memberships start at {money(pricing.paidInFull.effectiveMonthly)}
+          a month paid in full.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href={site.joinUrl} class="btn btn-gold px-7 py-3.5">
+            Sign Up at the Member Portal
+          </a>
+          <a href="#pricing" class="btn btn-outline px-7 py-3.5">
+            See Membership Pricing
+          </a>
+        </div>
+        <p class="mt-5 text-sm text-grail-fog">
+          Military rates from {money(pricing.militaryPaidInFull.effectiveMonthly)}/mo.
+          Day passes {money(pricing.dayPass.price)}.
+        </p>
+      </div>
+      <div class="card hidden items-center justify-center bg-black p-8 lg:flex">
+        <img
+          src="/logo-full.png"
+          alt="Grail Gym logo, San Antonio TX"
+          width="786"
+          height="614"
+          class="w-full max-w-sm"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about" class="scroll-mt-20 py-8 sm:py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="card p-6 sm:p-10">
+        <p class="text-xs font-bold uppercase tracking-widest text-grail-gold">
+          About Grail Gym
+        </p>
+        <p class="font-display mt-4 max-w-3xl text-xl leading-snug sm:text-2xl lg:text-3xl">
+          {site.whyWeExist}
+        </p>
+
+        <div class="mt-10 grid gap-4 md:grid-cols-3">
+          <div class="border border-grail-card-edge p-6">
+            <h2 class="text-lg font-bold">Commercial-grade equipment</h2>
+            <p class="mt-2 text-sm leading-relaxed text-grail-fog">
+              The floor is stocked with machines from {equipmentBrands.join(", ")}.
+              Equipment you can load heavy and trust every session.
+            </p>
+          </div>
+          <div class="border border-grail-card-edge p-6">
+            <h2 class="text-lg font-bold">24/7 member access</h2>
+            <p class="mt-2 text-sm leading-relaxed text-grail-fog">
+              Members enter any hour through the GymMaster door system. Train
+              before work, after a night shift, or whenever your program calls
+              for it.
+            </p>
+          </div>
+          <div class="border border-grail-card-edge p-6">
+            <h2 class="text-lg font-bold">Founding rates</h2>
+            <p class="mt-2 text-sm leading-relaxed text-grail-fog">
+              The gym is still growing. More machines and cardio are being
+              added, and rates will rise as they arrive. Current members keep
+              the rate they signed at.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOUNDER ===================== -->
+  <section id="story" class="scroll-mt-20 py-8 sm:py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="card grid gap-8 p-6 sm:p-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <!-- TODO: replace with a real photo of Hunter (public/hunter.jpg). -->
+        <div
+          class="flex aspect-[4/3] items-end border border-grail-card-edge bg-black p-6 md:aspect-[4/5]"
+        >
+          <p class="font-display text-2xl leading-tight">
+            {site.owner}<span class="text-grail-gold">.</span><br />
+            <span class="text-base font-normal text-grail-fog">Founder</span>
+          </p>
+        </div>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-grail-gold">
+            Meet the founder
+          </p>
+          <h2 class="font-display mt-3 text-2xl sm:text-3xl lg:text-4xl">
+            Built by a lifter who wanted his own gym.
+          </h2>
+          <p class="mt-4 leading-relaxed text-grail-fog">
+            {site.owner} wanted to open a gym for as long as he can remember.
+            Rather than wait for a polished grand opening, he opened the doors
+            as soon as the floor was ready so people could train while the gym
+            grows.
+          </p>
+          <p class="mt-4 leading-relaxed text-grail-fog">
+            That is the reason founding rates exist. Join early, lock in the
+            lowest price the gym will offer, and watch the equipment list get
+            longer. The members here now are part of building the place.
+          </p>
+          <blockquote
+            class="mt-6 border-l-2 border-grail-gold pl-5 font-display text-xl leading-snug"
+          >
+            "Be part of it while I'm building it."
+          </blockquote>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ===================== EQUIPMENT ===================== -->
-  <section id="equipment" class="border-t border-white/5 py-24">
-    <div class="mx-auto max-w-6xl px-5">
-      <h2 class="font-display text-3xl font-bold sm:text-4xl">High-quality equipment</h2>
-      <p class="mt-4 max-w-2xl text-grail-fog">
-        Commercial-grade bodybuilding equipment from the brands serious lifters
-        ask for — with more on the way.
-      </p>
+  <section id="equipment" class="scroll-mt-20 py-8 sm:py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="card p-6 sm:p-10">
+        <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl">
+          Gym equipment
+        </h2>
+        <p class="mt-3 max-w-2xl leading-relaxed text-grail-fog">
+          Every machine on the floor is commercial grade. These are the brands
+          you train on here.
+        </p>
 
-      <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
-        {
-          equipmentBrands.map((brand) => (
-            <div class="flex aspect-[4/3] flex-col justify-end rounded-xl border border-white/10 bg-grail-charcoal p-5">
-              {/* TODO: add real equipment photo per brand (public/equipment/) */}
-              <span class="font-display text-lg font-bold leading-tight">
-                {brand}
-              </span>
-            </div>
-          ))
-        }
-      </div>
+        <div class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+          {
+            equipmentBrands.map((brand) => (
+              <div class="flex aspect-[4/3] flex-col justify-end border border-grail-card-edge bg-black p-4 sm:p-5">
+                {/* TODO: add real equipment photo per brand (public/equipment/) */}
+                <span class="font-display text-base leading-tight sm:text-lg">
+                  {brand}
+                </span>
+              </div>
+            ))
+          }
+        </div>
 
-      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="rounded-xl border border-white/10 bg-grail-charcoal p-7">
-          <h3 class="text-lg font-bold">Free weights &amp; racks</h3>
-          <p class="mt-2 text-sm text-grail-fog">
-            Full dumbbell range, Olympic benches, and power/squat racks — the
-            staples, done right.
-          </p>
-        </div>
-        <div class="rounded-xl border border-white/10 bg-grail-charcoal p-7">
-          <h3 class="text-lg font-bold">Machines for every lift</h3>
-          <p class="mt-2 text-sm text-grail-fog">
-            Plate-loaded strength machines, a linear row "beast," hip-thrust, and
-            posterior-chain work covered.
-          </p>
-        </div>
-        <div
-          class="relative rounded-xl border border-dashed border-grail-gold/40 bg-grail-gold/5 p-7"
-        >
-          <span
-            class="absolute right-5 top-5 rounded-full bg-grail-gold px-2.5 py-1 text-xs font-bold text-grail-ink"
-            >Coming soon</span
-          >
-          <h3 class="text-lg font-bold">Cardio</h3>
-          <p class="mt-2 text-sm text-grail-fog">
-            Cardio is on the way — one more piece of the build, and one more
-            reason today's founding price won't last.
-          </p>
+        <div class="mt-4 grid gap-3 sm:mt-6 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+          <div class="border border-grail-card-edge p-6">
+            <h3 class="text-lg font-bold">Free weights and racks</h3>
+            <p class="mt-2 text-sm leading-relaxed text-grail-fog">
+              Full dumbbell range, Olympic benches, and power racks for squat,
+              bench, and deadlift work.
+            </p>
+          </div>
+          <div class="border border-grail-card-edge p-6">
+            <h3 class="text-lg font-bold">Machines for every lift</h3>
+            <p class="mt-2 text-sm leading-relaxed text-grail-fog">
+              Plate-loaded strength machines, a linear row, hip thrust, and
+              posterior chain equipment.
+            </p>
+          </div>
+          <div class="relative border border-grail-gold/50 p-6">
+            <span
+              class="absolute right-4 top-4 bg-grail-gold px-2 py-1 text-xs font-bold text-grail-ink"
+              >Coming soon</span
+            >
+            <h3 class="text-lg font-bold">Cardio</h3>
+            <p class="mt-2 text-sm leading-relaxed text-grail-fog">
+              Cardio equipment is on the way. Rates will rise once it lands, so
+              joining before then locks the lower price.
+            </p>
+          </div>
         </div>
       </div>
-      <p class="mt-8 font-display text-xl tracking-wide text-grail-fog">
-        . . . AND MORE TO COME
-      </p>
-      <!-- TODO: add a real photo gallery here from @grailgym (owner to send source files). -->
     </div>
   </section>
 
   <!-- ===================== PRICING ===================== -->
-  <section id="pricing" class="border-t border-white/5 py-24">
-    <div class="mx-auto max-w-6xl px-5">
-      <div class="text-center">
-        <h2 class="font-display text-3xl font-bold sm:text-4xl">
-          Founding Member pricing
+  <section id="pricing" class="scroll-mt-20 py-8 sm:py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="card p-6 sm:p-10">
+        <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl">
+          Membership pricing
         </h2>
-        <p class="mx-auto mt-4 max-w-xl text-grail-fog">
-          Lock today's rate before we expand. Pay monthly, or pay the year in
-          full and save.
+        <p class="mt-3 max-w-2xl leading-relaxed text-grail-fog">
+          Every plan includes 24/7 access to all equipment. Pick the term that
+          fits and sign up at the member portal. Prices are before sales tax,
+          which GymMaster adds at checkout.
+        </p>
+
+        <div class="mt-8 grid gap-4 md:grid-cols-3">
+          <!-- Month to month -->
+          <div class="flex flex-col border border-grail-card-edge p-6">
+            <h3 class="font-display text-xl">{pricing.monthToMonth.label}</h3>
+            <div class="mt-4 flex items-end gap-1">
+              <span class="font-display text-4xl sm:text-5xl"
+                >{money(pricing.monthToMonth.price)}</span
+              >
+              <span class="mb-1 text-grail-fog">{pricing.monthToMonth.period}</span>
+            </div>
+            <p class="mb-6 mt-3 text-sm leading-relaxed text-grail-fog">
+              {pricing.monthToMonth.note} Cancel anytime.
+            </p>
+            <a
+              href={site.joinUrl}
+              class="btn btn-outline mt-auto px-6 py-3 text-sm"
+              >Start month to month</a
+            >
+          </div>
+
+          <!-- 6 months -->
+          <div class="flex flex-col border border-grail-card-edge p-6">
+            <h3 class="font-display text-xl">{pricing.sixMonth.label}</h3>
+            <div class="mt-4 flex items-end gap-1">
+              <span class="font-display text-4xl sm:text-5xl"
+                >{money(pricing.sixMonth.price)}</span
+              >
+              <span class="mb-1 text-grail-fog">{pricing.sixMonth.period}</span>
+            </div>
+            <p class="mb-6 mt-3 text-sm leading-relaxed text-grail-fog">
+              {money(pricing.sixMonth.effectiveMonthly)} per month.
+              {pricing.sixMonth.note}
+            </p>
+            <a
+              href={site.joinUrl}
+              class="btn btn-outline mt-auto px-6 py-3 text-sm"
+              >Start 6 months</a
+            >
+          </div>
+
+          <!-- 1 year featured -->
+          <div class="relative flex flex-col border-2 border-grail-gold p-6">
+            <span
+              class="absolute -top-3 left-6 bg-grail-gold px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-grail-ink"
+              >Lowest rate</span
+            >
+            <h3 class="font-display text-xl">{pricing.paidInFull.label}</h3>
+            <div class="mt-4 flex items-end gap-1">
+              <span class="font-display text-4xl text-grail-gold sm:text-5xl"
+                >{money(pricing.paidInFull.price)}</span
+              >
+              <span class="mb-1 text-grail-fog">{pricing.paidInFull.period}</span>
+            </div>
+            <p class="mb-6 mt-3 text-sm leading-relaxed text-grail-fog">
+              {pricing.paidInFull.note} Saves {money(pricing.paidInFull.savingsWithSignup)}
+              in year one compared to month to month.
+            </p>
+            <a href={site.joinUrl} class="btn btn-gold mt-auto px-6 py-3 text-sm"
+              >Start the year plan</a
+            >
+          </div>
+        </div>
+
+        <!-- Military -->
+        <div
+          class="mt-4 grid gap-5 border border-grail-card-edge p-6 sm:grid-cols-[1fr_auto] sm:items-center"
+        >
+          <div>
+            <h3 class="font-display text-lg">
+              Military rate <span class="text-grail-gold">for active duty and veterans</span>
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-grail-fog">
+              {money(pricing.military.price)} per month, or {money(pricing.militaryPaidInFull.price)}
+              for a year paid in full, which works out to {money(
+                pricing.militaryPaidInFull.effectiveMonthly
+              )} per month. Signup fee waived.
+            </p>
+          </div>
+          <a href={site.joinUrl} class="btn btn-outline px-6 py-3 text-sm"
+            >Start military plan</a
+          >
+        </div>
+
+        <p class="mt-6 text-sm text-grail-fog">
+          Visiting San Antonio or want to try the gym first? A day pass is
+          <span class="font-bold text-white">{money(pricing.dayPass.price)}</span>,
+          valid on the day of purchase.
+          <a href={site.joinUrl} class="text-grail-gold underline underline-offset-4"
+            >Get a day pass at the portal</a
+          >.
         </p>
       </div>
-
-      <div class="mt-14 grid gap-6 lg:grid-cols-2">
-        <!-- Month to month -->
-        <div class="flex flex-col rounded-2xl border border-white/10 bg-grail-charcoal p-8">
-          <h3 class="font-display text-2xl font-bold">{pricing.monthToMonth.label}</h3>
-          <div class="mt-4 flex items-end gap-1">
-            <span class="font-display text-5xl font-bold"
-              >{money(pricing.monthToMonth.price)}</span
-            >
-            <span class="mb-1.5 text-grail-fog">{pricing.monthToMonth.period}</span>
-          </div>
-          <p class="mt-2 text-sm text-grail-fog">{pricing.monthToMonth.note}</p>
-          <ul class="mt-6 space-y-2 text-sm text-grail-fog">
-            <li>✓ Full 24/7 access to all equipment</li>
-            <li>✓ Founding rate locked while you stay</li>
-            <li>✓ No contract — cancel anytime</li>
-          </ul>
-          <a
-            href={site.joinUrl}
-            class="mt-8 rounded-md border border-white/15 px-6 py-3 text-center font-semibold transition hover:border-white/40"
-            >Start month-to-month</a
-          >
-        </div>
-
-        <!-- Paid in full — featured -->
-        <div
-          class="relative flex flex-col rounded-2xl border-2 border-grail-gold bg-gradient-to-b from-grail-gold/10 to-grail-charcoal p-8"
-        >
-          <span
-            class="absolute -top-3 left-8 rounded-full bg-grail-gold px-3 py-1 text-xs font-bold uppercase tracking-wide text-grail-ink"
-            >Best value</span
-          >
-          <h3 class="font-display text-2xl font-bold">{pricing.paidInFull.label}</h3>
-          <div class="mt-4 flex items-end gap-1">
-            <span class="font-display text-5xl font-bold text-grail-gold"
-              >{money(pricing.paidInFull.price)}</span
-            >
-            <span class="mb-1.5 text-grail-fog">{pricing.paidInFull.period}</span>
-          </div>
-          <p class="mt-2 text-sm font-semibold text-grail-gold">
-            That's just {money(pricing.paidInFull.effectiveMonthly)}/mo — and no sign-up fee.
-          </p>
-          <div class="mt-5 rounded-lg border border-grail-gold/30 bg-grail-ink/40 p-4 text-sm">
-            <p class="font-bold text-white">
-              Save {money(pricing.paidInFull.savingsWithSignup)} in year one
-            </p>
-            <p class="mt-1 text-grail-fog">
-              vs. {money(pricing.monthToMonth.price)}/mo ({money(
-                pricing.monthToMonth.price * 12
-              )} in dues) plus the {money(pricing.monthToMonth.signupFee)} sign-up fee.
-            </p>
-          </div>
-          <ul class="mt-6 space-y-2 text-sm text-grail-fog">
-            <li>✓ Everything in month-to-month</li>
-            <li>✓ Sign-up fee waived</li>
-            <li>✓ Lowest effective rate we offer</li>
-          </ul>
-          <a
-            href={site.joinUrl}
-            class="mt-8 rounded-md bg-grail-gold px-6 py-3 text-center font-bold text-grail-ink transition hover:bg-grail-gold-bright"
-            >Pay the year in full</a
-          >
-        </div>
-      </div>
-
-      <!-- Military -->
-      <div
-        class="mt-6 grid gap-6 rounded-2xl border border-white/10 bg-grail-charcoal p-8 sm:grid-cols-[1fr_auto] sm:items-center"
-      >
-        <div>
-          <h3 class="font-display text-xl font-bold">
-            Military <span class="text-grail-gold">— thank you for your service</span>
-          </h3>
-          <p class="mt-2 text-sm text-grail-fog">
-            Active duty &amp; veterans: {money(pricing.military.price)}/mo, or pay
-            the year in full for {money(pricing.militaryPaidInFull.price)}
-            (just {money(pricing.militaryPaidInFull.effectiveMonthly)}/mo) — sign-up
-            fee waived. <!-- TODO: confirm military sign-up fee is waived. -->
-          </p>
-        </div>
-        <a
-          href={site.joinUrl}
-          class="rounded-md border border-grail-gold/50 px-6 py-3 text-center font-bold text-grail-gold transition hover:bg-grail-gold hover:text-grail-ink"
-          >Claim military rate</a
-        >
-      </div>
-
-      <p class="mt-6 text-center text-sm text-grail-fog">
-        Just visiting? Grab a <span class="font-semibold text-white"
-          >{money(pricing.dayPass.price)} day pass</span
-        > — {pricing.dayPass.note.toLowerCase()}. Prices shown before applicable tax.
-      </p>
     </div>
   </section>
 
   <!-- ===================== PERSONAL TRAINING ===================== -->
-  <section id="training" class="border-t border-white/5 py-24">
-    <div
-      class="mx-auto flex max-w-6xl flex-col gap-6 px-5 sm:flex-row sm:items-center sm:justify-between"
-    >
-      <div class="max-w-xl">
-        <span class="text-xs font-semibold uppercase tracking-widest text-grail-gold"
-          >Personal training</span
-        >
-        <h2 class="font-display mt-4 text-3xl font-bold sm:text-4xl">
-          Train with a coach — in a private, uncrowded space.
-        </h2>
-        <p class="mt-4 text-grail-fog">
-          Whether your goal is fat loss, muscle gain, or just getting stronger,
-          our trainers will build the plan. Bring your own clients, too — coaches
-          are welcome to train them here.
-        </p>
-      </div>
-      <a
-        href={site.trainingFormUrl}
-        class="shrink-0 rounded-md bg-grail-gold px-7 py-3.5 text-center font-bold text-grail-ink transition hover:bg-grail-gold-bright"
-        >Book a consultation</a
+  <section id="training" class="scroll-mt-20 py-8 sm:py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div
+        class="card flex flex-col gap-6 p-6 sm:p-10 md:flex-row md:items-center md:justify-between"
       >
+        <div class="max-w-xl">
+          <p class="text-xs font-bold uppercase tracking-widest text-grail-gold">
+            Personal training
+          </p>
+          <h2 class="font-display mt-3 text-2xl sm:text-3xl lg:text-4xl">
+            Coaching in an uncrowded gym.
+          </h2>
+          <p class="mt-4 leading-relaxed text-grail-fog">
+            Trainers at {site.name} program for fat loss, muscle gain, and
+            strength. Independent coaches are welcome to train their own
+            clients here. Fill out the form and a coach will contact you.
+          </p>
+        </div>
+        <a href={site.trainingFormUrl} class="btn btn-gold shrink-0 px-7 py-3.5"
+          >Request a consultation</a
+        >
+      </div>
     </div>
   </section>
 
-  <!-- ===================== VISIT / LOCATION ===================== -->
-  <section id="visit" class="border-t border-white/5 py-24">
-    <div class="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-2">
-      <div>
-        <h2 class="font-display text-3xl font-bold sm:text-4xl">Come train</h2>
-        <p class="mt-4 text-grail-fog">
-          We're in southeast San Antonio. Members get in 24/7 — stop by for a
-          day pass or sign up online and start today.
+  <!-- ===================== LOCATION ===================== -->
+  <section id="location" class="scroll-mt-20 py-8 sm:py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="card p-6 sm:p-10">
+        <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl">
+          Location and hours
+        </h2>
+        <p class="mt-3 max-w-2xl leading-relaxed text-grail-fog">
+          The gym is in southeast San Antonio on Rigsby Ave. Members get in
+          24/7. Sign up online or at the door.
         </p>
-        <dl class="mt-8 space-y-5 text-sm">
+        <div class="mt-8 grid gap-6 sm:grid-cols-3">
           <div>
-            <dt class="font-semibold uppercase tracking-widest text-grail-gold">Address</dt>
-            <dd class="mt-1 text-lg">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-grail-gold">
+              Address
+            </h3>
+            <p class="mt-2 leading-relaxed">
               {site.address.street}<br />
               {site.address.city}, {site.address.state} {site.address.zip}
-            </dd>
+            </p>
           </div>
           <div>
-            <dt class="font-semibold uppercase tracking-widest text-grail-gold">Hours</dt>
-            <dd class="mt-1 text-lg">{site.hours}</dd>
+            <h3 class="text-xs font-bold uppercase tracking-widest text-grail-gold">
+              Hours
+            </h3>
+            <p class="mt-2 leading-relaxed">{site.hours}</p>
           </div>
           <div>
-            <dt class="font-semibold uppercase tracking-widest text-grail-gold">Contact</dt>
-            <dd class="mt-1 text-lg">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-grail-gold">
+              Contact
+            </h3>
+            <p class="mt-2 leading-relaxed">
               <a class="hover:text-grail-gold" href={site.phoneHref}>{site.phone}</a><br />
               <a class="hover:text-grail-gold" href={`mailto:${site.email}`}>{site.email}</a>
-            </dd>
+            </p>
           </div>
-        </dl>
-        <div class="mt-8 flex flex-wrap gap-4 text-sm">
-          <a href={site.reviews} class="rounded-md border border-white/15 px-5 py-2.5 font-semibold transition hover:border-white/40">Google reviews</a>
-          <a href={site.instagram} class="rounded-md border border-white/15 px-5 py-2.5 font-semibold transition hover:border-white/40">Instagram</a>
-          <a href={site.facebook} class="rounded-md border border-white/15 px-5 py-2.5 font-semibold transition hover:border-white/40">Facebook</a>
         </div>
-      </div>
-
-      <div class="overflow-hidden rounded-2xl border border-white/10">
-        <iframe
-          title={`Map to ${site.name}`}
-          class="h-full min-h-[340px] w-full"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src={`https://www.google.com/maps?q=${encodeURIComponent(
-            `${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.zip}`
-          )}&output=embed`}></iframe>
+        <div class="mt-8 flex flex-wrap gap-3 text-sm">
+          <a href={site.reviews} class="btn btn-outline px-5 py-2.5">Google reviews</a>
+          <a href={site.instagram} class="btn btn-outline px-5 py-2.5">Instagram</a>
+          <a href={site.facebook} class="btn btn-outline px-5 py-2.5">Facebook</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ===================== FAQ ===================== -->
-  <section class="border-t border-white/5 py-24">
-    <div class="mx-auto max-w-3xl px-5">
-      <h2 class="font-display text-3xl font-bold sm:text-4xl">Questions</h2>
-      <div class="mt-10 space-y-4">
-        <details class="rounded-xl border border-white/10 bg-grail-charcoal p-6">
-          <summary class="cursor-pointer list-none font-semibold marker:hidden">
-            What's the catch with "founding member" pricing?
-          </summary>
-          <p class="mt-3 text-sm text-grail-fog">
-            No catch. We're a brand-new gym that's still growing. As we add more
-            machines and cardio, prices will go up — but your founding rate stays
-            locked while your membership is active.
-          </p>
-        </details>
-        <details class="rounded-xl border border-white/10 bg-grail-charcoal p-6">
-          <summary class="cursor-pointer list-none font-semibold marker:hidden">
-            Is it really open 24/7?
-          </summary>
-          <p class="mt-3 text-sm text-grail-fog">
-            Yes — members get 24/7 access through the GymMaster door system and
-            app. Day passes are usable the day of purchase during open hours.
-          </p>
-        </details>
-        <details class="rounded-xl border border-white/10 bg-grail-charcoal p-6">
-          <summary class="cursor-pointer list-none font-semibold marker:hidden">
-            Is there cardio equipment?
-          </summary>
-          <p class="mt-3 text-sm text-grail-fog">
-            Not yet — it's on the way. Right now the floor is built around serious
-            strength training: commercial-grade machines, racks, and a full
-            dumbbell range.
-          </p>
-        </details>
-        <details class="rounded-xl border border-white/10 bg-grail-charcoal p-6">
-          <summary class="cursor-pointer list-none font-semibold marker:hidden">
-            How do I sign up?
-          </summary>
-          <p class="mt-3 text-sm text-grail-fog">
-            Hit any “Join” button — it takes you straight to our member portal to
-            pick your plan and start training. You can also sign up at the door.
-          </p>
-        </details>
+  <section id="faq" class="scroll-mt-20 py-8 sm:py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="card p-6 sm:p-10">
+        <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl">
+          Frequently asked questions
+        </h2>
+        <div class="mt-8 space-y-3">
+          {
+            faqs.map((f) => (
+              <details class="border border-grail-card-edge p-5">
+                <summary class="cursor-pointer list-none font-bold marker:hidden">
+                  {f.q}
+                </summary>
+                <p class="mb-6 mt-3 text-sm leading-relaxed text-grail-fog">{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ===================== FINAL CTA ===================== -->
-  <section class="border-t border-white/5 py-24">
-    <div class="mx-auto max-w-4xl px-5 text-center">
-      <h2 class="font-display text-4xl font-bold sm:text-5xl">
-        The price only goes up from here.
-      </h2>
-      <p class="mx-auto mt-5 max-w-xl text-grail-fog">
-        Memberships are limited. Be one of the names that was here first — lock
-        your founding rate today.
-      </p>
-      <a
-        href={site.joinUrl}
-        class="mt-9 inline-block rounded-md bg-grail-gold px-9 py-4 font-bold text-grail-ink transition hover:bg-grail-gold-bright"
-      >
-        Become a Founding Member
-      </a>
+  <section class="py-8 sm:py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="card p-8 text-center sm:p-12">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl">
+          Ready to train?
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl leading-relaxed text-grail-fog">
+          Sign up online in a few minutes, or come see the gym at
+          {site.address.street.split(",")[0]}. Founding rates apply while the
+          gym is still building out.
+        </p>
+        <a href={site.joinUrl} class="btn btn-gold mt-8 px-9 py-4">
+          Sign Up at the Member Portal
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- ===================== FOOTER ===================== -->
-  <footer class="border-t border-white/5 py-12">
-    <div
-      class="mx-auto flex max-w-6xl flex-col gap-6 px-5 sm:flex-row sm:items-center sm:justify-between"
-    >
-      <div>
-        <p class="font-display text-lg font-bold">
-          GRAIL<span class="text-grail-gold">GYM</span>
-          <span class="ml-2 text-xs font-medium tracking-widest text-grail-fog"
-            >SAN ANTONIO, TX</span
-          >
-        </p>
-        <p class="mt-1 text-sm text-grail-fog">
-          {site.address.street}, {site.address.city}, {site.address.state}
-          {site.address.zip} · {site.hours}
-        </p>
+  <footer class="mt-8 border-t border-grail-card-edge">
+    <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+      <div class="grid gap-8 md:grid-cols-2 md:items-start">
+        <div>
+          <p class="font-display text-lg">
+            GRAIL<span class="text-grail-gold">GYM</span>
+            <span class="ml-2 text-xs font-normal tracking-widest text-grail-fog"
+              >SAN ANTONIO, TX</span
+            >
+          </p>
+          <p class="mt-2 text-sm leading-relaxed text-grail-fog">
+            {site.address.street}, {site.address.city}, {site.address.state}
+            {site.address.zip}<br />
+            {site.hours}
+          </p>
+          <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-grail-fog">
+            <a href={site.phoneHref} class="transition hover:text-white">{site.phone}</a>
+            <a href={site.instagram} class="transition hover:text-white">{site.instagramHandle}</a>
+            <a href={site.joinUrl} class="transition hover:text-white">Member Portal</a>
+          </div>
+        </div>
+        <div class="card overflow-hidden bg-black p-0">
+          <iframe
+            src={site.mapEmbedSrc}
+            title={`Google Maps location of ${site.name}, ${site.address.street}, San Antonio TX`}
+            class="h-72 w-full sm:h-80"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
       </div>
-      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-grail-fog">
-        <a href={site.phoneHref} class="transition hover:text-white">{site.phone}</a>
-        <a href={site.instagram} class="transition hover:text-white">{site.instagramHandle}</a>
-        <a href={site.joinUrl} class="transition hover:text-white">Member Portal</a>
-      </div>
+      <p class="mt-8 text-center text-xs text-grail-fog/60">
+        © {new Date().getFullYear()} {site.name}. {site.address.street}, {site.address.city},
+        {site.address.state} {site.address.zip}. Open 24/7 for members.
+      </p>
     </div>
-    <p class="mt-8 text-center text-xs text-grail-fog/60">
-      © {new Date().getFullYear()} {site.name}. {site.address.street}, {site.address.city}, {site.address.state} {site.address.zip}.
-    </p>
   </footer>
 </Layout>

@@ -47,14 +47,22 @@ npm run preview  # preview the production build
 
 Search the codebase for `TODO`. Still needed from the owner:
 
-- Real **photos** — owner to send source files (IG CDN URLs are signed/expiring
-  and can't be hotlinked). Wanted: a hero shot (IG reel `DZtvOu6t-jJ` or photo
-  `DZSxpVKJKZp`), per-brand equipment images, and a gallery → drop into `public/`.
-- **OG share image** (`public/og.jpg`, 1200×630).
-- The **owner's name + founding story** (the young-owner angle is a strong trust
-  signal and isn't anywhere public yet) → add a "Meet the owner" block.
+- Real interior **photos** — owner to send source files (IG CDN URLs are
+  signed/expiring and can't be hotlinked). Wanted: hero/interior shots,
+  per-brand equipment images, and a photo of Hunter → drop into `public/`.
+  (Official logos were pulled from grailgymtx.com: `public/logo-gold.jpg`,
+  `public/logo-full.png` — OG image uses the gold logo for now.)
 - Confirm the **military sign-up fee** is waived (assumed waived).
+- Confirm whether the **1-year paid-in-full signup fee** is waived — the
+  grailgymtx.com pricing table shows a $49.99 signup fee on every plan, but
+  the owner previously confirmed it's waived on paid-in-full. Site says waived.
 - **Meta Pixel** snippet (in `src/layouts/Layout.astro`) for ad retargeting.
+
+### Fonts
+
+Proxima Nova (Regular / Bold / Black) is self-hosted in `public/fonts/` and
+used for all type. Note: Proxima Nova is a commercially licensed font — make
+sure the owner's license covers web embedding before going wide with it.
 
 ## Pricing (confirmed)
 

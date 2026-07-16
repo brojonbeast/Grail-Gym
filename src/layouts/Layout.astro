@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { site } from "../data/site";
+import { site, pricing } from "../data/site";
 
 interface Props {
   title?: string;
@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = `${site.name} — 24/7 Strength Gym in ${site.cityState}`,
-  description = `${site.name} is a 24/7 bodybuilding gym in ${site.region}. Commercial-grade machines, no big-box crowds. Founding Members lock in the lowest price we'll ever offer — before we expand.`,
+  title = `${site.name} | 24 Hour Gym in San Antonio, TX (Rigsby Ave)`,
+  description = `${site.name} is a 24 hour strength and bodybuilding gym at ${site.address.street}, San Antonio, TX ${site.address.zip}. Commercial-grade equipment, memberships from $${pricing.paidInFull.effectiveMonthly}/mo paid in full, military rates, and $${pricing.dayPass.price} day passes.`,
 } = Astro.props;
 
 const businessSchema = {
@@ -20,6 +20,9 @@ const businessSchema = {
   url: Astro.site?.href,
   telephone: site.phone,
   email: site.email,
+  image: new URL("/logo-gold.jpg", Astro.site).href,
+  logo: new URL("/logo-full.png", Astro.site).href,
+  priceRange: "$20 - $49.99",
   address: {
     "@type": "PostalAddress",
     streetAddress: site.address.street,
@@ -28,7 +31,26 @@ const businessSchema = {
     postalCode: site.address.zip,
     addressCountry: "US",
   },
-  openingHours: "Mo-Su 00:00-23:59",
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 29.3977534,
+    longitude: -98.4026659,
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "00:00",
+    closes: "23:59",
+  },
+  hasMap: site.reviews,
   sameAs: [site.instagram, site.facebook],
 };
 ---
@@ -41,31 +63,39 @@ const businessSchema = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={Astro.site} />
 
     <!-- Open Graph / social share -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={Astro.site} />
-    <!-- TODO: add a real share image at public/og.jpg (1200×630) -->
-    <meta property="og:image" content="/og.jpg" />
+    <meta property="og:image" content={new URL("/logo-gold.jpg", Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Self-hosted Proxima Nova -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/ProximaNovaBlack.woff"
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/ProximaNovaRegular.woff"
+      as="font"
+      type="font/woff"
+      crossorigin
     />
 
-    <!-- Local business structured data (helps Google Maps / local SEO) -->
+    <!-- Local business structured data (Google Maps / local SEO) -->
     <script
       type="application/ld+json"
       set:html={JSON.stringify(businessSchema)}
     />
 
-    <!-- TODO: paste Meta Pixel here for the founding-members ad retargeting -->
+    <!-- TODO: paste Meta Pixel here for ad retargeting -->
   </head>
   <body>
     <slot />
