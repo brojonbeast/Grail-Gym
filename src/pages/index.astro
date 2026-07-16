@@ -4,6 +4,31 @@ import { site, pricing, equipmentBrands } from "../data/site";
 
 const money = (n: number) => (n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`);
 
+// Real photos pulled from grailgymtx.com. Arsenal Strength has no photo yet.
+const brandPhotos: Record<
+  string,
+  { src: string; alt: string; width: number; height: number }
+> = {
+  "Intek Strength": {
+    src: "/equipment/intek.jpg",
+    alt: "Intek Strength dumbbell rack at Grail Gym San Antonio",
+    width: 900,
+    height: 1200,
+  },
+  "Mega Mass": {
+    src: "/equipment/mega-mass.jpg",
+    alt: "Mega Mass plate-loaded machine at Grail Gym San Antonio",
+    width: 900,
+    height: 1004,
+  },
+  "Booty Builder": {
+    src: "/equipment/booty-builder.jpg",
+    alt: "Booty Builder glute machine at Grail Gym San Antonio",
+    width: 900,
+    height: 675,
+  },
+};
+
 const faqs = [
   {
     q: "Where is Grail Gym located?",
@@ -108,13 +133,13 @@ const faqSchema = {
           Day passes {money(pricing.dayPass.price)}.
         </p>
       </div>
-      <div class="card hidden items-center justify-center bg-black p-8 lg:flex">
+      <div class="card hidden overflow-hidden lg:block">
         <img
-          src="/logo-full.png"
-          alt="Grail Gym logo, San Antonio TX"
-          width="786"
-          height="614"
-          class="w-full max-w-sm"
+          src="/gym-floor.jpg"
+          alt="Gym floor at Grail Gym San Antonio with plate-loaded squat and hack squat machines"
+          width="1206"
+          height="1149"
+          class="h-full max-h-[70vh] w-full object-cover"
           loading="eager"
           fetchpriority="high"
         />
@@ -217,14 +242,26 @@ const faqSchema = {
 
         <div class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
           {
-            equipmentBrands.map((brand) => (
-              <div class="flex aspect-[4/3] flex-col justify-end border border-grail-card-edge bg-black p-4 sm:p-5">
-                {/* TODO: add real equipment photo per brand (public/equipment/) */}
-                <span class="font-display text-base leading-tight sm:text-lg">
-                  {brand}
-                </span>
-              </div>
-            ))
+            equipmentBrands.map((brand) => {
+              const photo = brandPhotos[brand];
+              return (
+                <div class="relative flex aspect-[4/5] flex-col justify-end overflow-hidden border border-grail-card-edge bg-black p-4 sm:p-5">
+                  {photo && (
+                    <img
+                      src={photo.src}
+                      alt={photo.alt}
+                      width={photo.width}
+                      height={photo.height}
+                      class="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  )}
+                  <span class="relative bg-grail-ink px-2 py-1 font-display text-base leading-tight sm:text-lg">
+                    {brand}
+                  </span>
+                </div>
+              );
+            })
           }
         </div>
 
