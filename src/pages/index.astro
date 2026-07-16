@@ -15,11 +15,11 @@ const faqs = [
   },
   {
     q: "How much does a membership cost?",
-    a: `Month to month is ${money(pricing.monthToMonth.price)} per month with a ${money(pricing.monthToMonth.signupFee)} one-time signup fee. Six months paid in full is ${money(pricing.sixMonth.price)}. A year paid in full is ${money(pricing.paidInFull.price)}, which works out to ${money(pricing.paidInFull.effectiveMonthly)} per month. Prices are before sales tax.`,
+    a: `Month to month is ${money(pricing.monthToMonth.price)} per month. Six months paid in full is ${money(pricing.sixMonth.price)}. A year paid in full is ${money(pricing.paidInFull.price)}, which works out to ${money(pricing.paidInFull.effectiveMonthly)} per month.`,
   },
   {
     q: "Is there a military discount?",
-    a: `Yes. Active duty and veterans pay ${money(pricing.military.price)} per month, or ${money(pricing.militaryPaidInFull.price)} for a full year, which works out to ${money(pricing.militaryPaidInFull.effectiveMonthly)} per month. The signup fee is waived.`,
+    a: `Yes. Active duty and veterans pay ${money(pricing.military.price)} per month, or ${money(pricing.militaryPaidInFull.price)} for a full year, which works out to ${money(pricing.militaryPaidInFull.effectiveMonthly)} per month.`,
   },
   {
     q: "Can I try the gym without a membership?",
@@ -268,8 +268,7 @@ const faqSchema = {
         </h2>
         <p class="mt-3 max-w-2xl leading-relaxed text-grail-fog">
           Every plan includes 24/7 access to all equipment. Pick the term that
-          fits and sign up at the member portal. Prices are before sales tax,
-          which GymMaster adds at checkout.
+          fits and sign up at the member portal.
         </p>
 
         <div class="mt-8 grid gap-4 md:grid-cols-3">
@@ -326,8 +325,8 @@ const faqSchema = {
               <span class="mb-1 text-grail-fog">{pricing.paidInFull.period}</span>
             </div>
             <p class="mb-6 mt-3 text-sm leading-relaxed text-grail-fog">
-              {pricing.paidInFull.note} Saves {money(pricing.paidInFull.savingsWithSignup)}
-              in year one compared to month to month.
+              {pricing.paidInFull.note} Saves {money(pricing.paidInFull.savingsVsDues)}
+              a year compared to month to month.
             </p>
             <a
               href={site.planUrls.paidInFull}
@@ -349,7 +348,7 @@ const faqSchema = {
               {money(pricing.military.price)} per month, or {money(pricing.militaryPaidInFull.price)}
               for a year paid in full, which works out to {money(
                 pricing.militaryPaidInFull.effectiveMonthly
-              )} per month. Signup fee waived.
+              )} per month.
             </p>
           </div>
           <a href={site.joinUrl} class="btn btn-outline px-6 py-3 text-sm"
@@ -360,12 +359,21 @@ const faqSchema = {
         <p class="mt-6 text-sm text-grail-fog">
           Visiting San Antonio or want to try the gym first? A day pass is
           <span class="font-bold text-white">{money(pricing.dayPass.price)}</span>,
-          valid on the day of purchase.
+          valid on the day of purchase, and a week pass is
+          <span class="font-bold text-white">{money(pricing.weekPass.price)}</span>
+          for seven days of access.
           <a
             href={site.planUrls.dayPass}
             class="text-grail-gold underline underline-offset-4"
-            >Get a day pass at the portal</a
-          >.
+            >Get a day pass</a
+          >
+          or
+          <a
+            href={site.planUrls.weekPass}
+            class="text-grail-gold underline underline-offset-4"
+            >get a week pass</a
+          >
+          at the portal.
         </p>
       </div>
     </div>

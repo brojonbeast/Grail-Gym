@@ -52,11 +52,10 @@ Search the codebase for `TODO`. Still needed from the owner:
   per-brand equipment images, and a photo of Hunter → drop into `public/`.
   (Official logos were pulled from grailgymtx.com: `public/logo-gold.jpg`,
   `public/logo-full.png` — OG image uses the gold logo for now.)
-- Confirm the **military sign-up fee** is waived (assumed waived).
-- Confirm whether the **1-year paid-in-full signup fee** is waived — the
-  grailgymtx.com pricing table shows a $49.99 signup fee on every plan, but
-  the owner previously confirmed it's waived on paid-in-full. Site says waived.
 - **Meta Pixel** snippet (in `src/layouts/Layout.astro`) for ad retargeting.
+- GymMaster portal still shows a **$49.99 signup fee** on membership plans —
+  owner confirmed (2026-07-16) pricing is flat with no signup fee and is
+  having it removed from GymMaster. The site shows flat prices only.
 
 ### Fonts
 
@@ -65,9 +64,15 @@ used for all type. Inter is open-source (SIL OFL) — no licensing constraints.
 
 ## Pricing (confirmed)
 
-| Plan                       | Price        | Effective | Notes                                  |
-| -------------------------- | ------------ | --------- | -------------------------------------- |
-| Month-to-month             | $49.99/mo    | —         | + $49.99 one-time sign-up fee          |
-| 1 year paid in full        | **$480/yr**  | $40/mo    | No sign-up fee · saves $169.87 yr one  |
-| Military                   | $39.99/mo    | —         | Sign-up fee waived                     |
-| Military paid in full      | **$360/yr**  | $30/mo    | No sign-up fee · saves $119.88         |
+Flat pricing, no signup fees. Sales tax applies at checkout but is
+deliberately not mentioned on the site.
+
+| Plan                  | Price       | Effective | Notes             |
+| --------------------- | ----------- | --------- | ----------------- |
+| Month-to-month        | $49.99/mo   | —         | No contract       |
+| 6 months paid in full | **$275**    | $45.83/mo |                   |
+| 1 year paid in full   | **$480/yr** | $40/mo    | Saves $119.88/yr  |
+| Military              | $39.99/mo   | —         | Active duty + vets|
+| Military paid in full | **$360/yr** | $30/mo    | Saves $119.88/yr  |
+| Day pass              | $20         | —         | Day of purchase   |
+| Week pass             | $34.95      | —         | Seven days        |

@@ -59,16 +59,16 @@ export const equipmentBrands = [
 
 /**
  * Membership pricing. Confirmed with owner. Do not change without sign-off.
- * Prices shown before sales tax (GymMaster adds tax at checkout).
- * The 6-month plan comes from the official grailgymtx.com pricing table.
+ * Flat pricing — no signup fees are shown or charged (owner confirmed
+ * 2026-07-16; the fee shown on the GymMaster portal is being removed).
+ * Sales tax applies at checkout but is deliberately not mentioned on site.
  */
 export const pricing = {
   monthToMonth: {
     label: "Month to Month",
     price: 49.99,
     period: "/mo",
-    signupFee: 49.99,
-    note: "No contract. $49.99 one-time signup fee.",
+    note: "No contract.",
   },
   sixMonth: {
     label: "6 Months, Paid in Full",
@@ -83,14 +83,13 @@ export const pricing = {
     period: "/year",
     effectiveMonthly: 40.0, // 480 / 12
     savingsVsDues: 119.88, // 12 × 49.99 − 480
-    savingsWithSignup: 169.87, // (12 × 49.99 + 49.99) − 480
-    note: "$40 per month. No signup fee.",
+    note: "$40 per month.",
   },
   military: {
     label: "Military",
     price: 39.99,
     period: "/mo",
-    note: "Active duty and veterans. Signup fee waived.",
+    note: "Active duty and veterans.",
   },
   militaryPaidInFull: {
     label: "Military, Paid in Full",
@@ -98,11 +97,16 @@ export const pricing = {
     period: "/year",
     effectiveMonthly: 30.0, // 360 / 12
     savingsVsDues: 119.88, // 12 × 39.99 − 360
-    note: "$30 per month. No signup fee.",
+    note: "$30 per month.",
   },
   dayPass: {
     label: "Day Pass",
     price: 20,
     note: "Valid on the day of purchase during staffed hours",
+  },
+  weekPass: {
+    label: "Week Pass",
+    price: 34.95,
+    note: "Seven days of access",
   },
 } as const;
