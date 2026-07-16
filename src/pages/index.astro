@@ -286,7 +286,7 @@ const faqSchema = {
               {pricing.monthToMonth.note} Cancel anytime.
             </p>
             <a
-              href={site.joinUrl}
+              href={site.planUrls.monthToMonth}
               class="btn btn-outline mt-auto px-6 py-3 text-sm"
               >Start month to month</a
             >
@@ -306,7 +306,7 @@ const faqSchema = {
               {pricing.sixMonth.note}
             </p>
             <a
-              href={site.joinUrl}
+              href={site.planUrls.sixMonth}
               class="btn btn-outline mt-auto px-6 py-3 text-sm"
               >Start 6 months</a
             >
@@ -329,7 +329,9 @@ const faqSchema = {
               {pricing.paidInFull.note} Saves {money(pricing.paidInFull.savingsWithSignup)}
               in year one compared to month to month.
             </p>
-            <a href={site.joinUrl} class="btn btn-gold mt-auto px-6 py-3 text-sm"
+            <a
+              href={site.planUrls.paidInFull}
+              class="btn btn-gold mt-auto px-6 py-3 text-sm"
               >Start the year plan</a
             >
           </div>
@@ -359,7 +361,9 @@ const faqSchema = {
           Visiting San Antonio or want to try the gym first? A day pass is
           <span class="font-bold text-white">{money(pricing.dayPass.price)}</span>,
           valid on the day of purchase.
-          <a href={site.joinUrl} class="text-grail-gold underline underline-offset-4"
+          <a
+            href={site.planUrls.dayPass}
+            class="text-grail-gold underline underline-offset-4"
             >Get a day pass at the portal</a
           >.
         </p>

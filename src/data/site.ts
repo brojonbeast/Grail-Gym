@@ -25,6 +25,20 @@ export const site = {
   reviews: "https://maps.app.goo.gl/4tunuwerZdsPjw1j9",
   // GymMaster member portal. Signups and payments happen here.
   joinUrl: "https://grailgym.gymmasteronline.com/portal/signup",
+  // Plan-specific GymMaster signup pages (hashes verified against the live
+  // portal 2026-07-16; each detail page shows the matching plan name).
+  planUrls: {
+    monthToMonth:
+      "https://grailgym.gymmasteronline.com/portal/signup/details/f49f5b1ec7e4d662b4de31eebbda9683",
+    sixMonth:
+      "https://grailgym.gymmasteronline.com/portal/signup/details/6a3869cd64d73521f0faa3612ed36246",
+    paidInFull:
+      "https://grailgym.gymmasteronline.com/portal/signup/details/df1b7d86020482900e6f2c3bd32d04ac",
+    dayPass:
+      "https://grailgym.gymmasteronline.com/portal/signup/details/dab3f88798e27212f9e283ec7ea6b915",
+    weekPass:
+      "https://grailgym.gymmasteronline.com/portal/signup/details/88cd1df8b3a7a3e4214b9d2bc8b4f785",
+  },
   // Personal training inquiry form (from IG bio).
   trainingFormUrl:
     "https://docs.google.com/forms/d/e/1FAIpQLSfLzTHD30O_6iQo3JVp3Khf5bVm6EQLHJ-CaUGJ2XfgcatM1w/viewform",

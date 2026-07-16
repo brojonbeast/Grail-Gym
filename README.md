@@ -60,9 +60,8 @@ Search the codebase for `TODO`. Still needed from the owner:
 
 ### Fonts
 
-Proxima Nova (Regular / Bold / Black) is self-hosted in `public/fonts/` and
-used for all type. Note: Proxima Nova is a commercially licensed font — make
-sure the owner's license covers web embedding before going wide with it.
+Inter (400 / 700 / 900, latin subset) is self-hosted in `public/fonts/` and
+used for all type. Inter is open-source (SIL OFL) — no licensing constraints.
 
 ## Pricing (confirmed)
 
