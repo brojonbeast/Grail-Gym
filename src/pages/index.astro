@@ -40,7 +40,7 @@ const faqs = [
   },
   {
     q: "How much does a membership cost?",
-    a: `Month to month is ${money(pricing.monthToMonth.price)} per month. Six months paid in full is ${money(pricing.sixMonth.price)}. A year paid in full is ${money(pricing.paidInFull.price)}, which works out to ${money(pricing.paidInFull.effectiveMonthly)} per month.`,
+    a: `Month to month is ${money(pricing.monthToMonth.price)} per month with a ${money(pricing.monthToMonth.signupFee)} one-time signup fee. Six months paid in full is ${money(pricing.sixMonth.price)}. A year paid in full is ${money(pricing.paidInFull.price)}, which works out to ${money(pricing.paidInFull.effectiveMonthly)} per month with no signup fee.`,
   },
   {
     q: "Is there a military discount?",
@@ -98,52 +98,51 @@ const faqSchema = {
   <!-- ===================== HERO ===================== -->
   <section
     id="top"
-    class="flex min-h-svh items-center pt-16 lg:h-screen lg:min-h-0"
+    class="relative flex min-h-svh items-center pt-16 md:h-screen md:min-h-[44rem]"
   >
+    <!-- Full-bleed photo background on tablet and desktop. -->
+    <img
+      src="/gym-floor.jpg"
+      alt="Gym floor at Grail Gym San Antonio with plate-loaded squat and hack squat machines"
+      width="1206"
+      height="1149"
+      class="absolute inset-0 hidden h-full w-full object-cover md:block"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 hidden bg-grail-ink/75 md:block"></div>
+
     <div
-      class="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16"
+      class="relative mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 md:px-10"
     >
-      <div>
-        <p
-          class="inline-block border border-grail-card-edge px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-grail-gold"
-        >
-          Now open at 4654 Rigsby Ave
-        </p>
-        <h1
-          class="font-display mt-5 text-4xl uppercase leading-[1.02] sm:text-6xl lg:text-7xl"
-        >
-          A 24 hour bodybuilding gym in San Antonio, Texas.
-        </h1>
-        <p class="mt-6 max-w-xl text-base text-grail-fog sm:text-lg">
-          {site.name} is a strength and bodybuilding gym in southeast San
-          Antonio. Commercial-grade machines, 24/7 member access, and room to
-          train. Memberships start at {money(pricing.paidInFull.effectiveMonthly)}
-          a month paid in full.
-        </p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href={site.joinUrl} class="btn btn-gold px-7 py-3.5">
-            Sign Up at the Member Portal
-          </a>
-          <a href="#pricing" class="btn btn-outline px-7 py-3.5">
-            See Membership Pricing
-          </a>
-        </div>
-        <p class="mt-5 text-sm text-grail-fog">
-          Military rates from {money(pricing.militaryPaidInFull.effectiveMonthly)}/mo.
-          Day passes {money(pricing.dayPass.price)}.
-        </p>
+      <p
+        class="inline-block border border-grail-card-edge px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-grail-gold md:border-grail-fog/40"
+      >
+        Now open at 4654 Rigsby Ave
+      </p>
+      <h1
+        class="font-display mt-5 max-w-6xl text-4xl uppercase leading-[1.02] sm:text-6xl md:mt-8 md:text-7xl lg:text-8xl xl:text-[7.5rem] xl:leading-[0.98]"
+      >
+        A 24 hour bodybuilding gym in San Antonio, Texas.
+      </h1>
+      <p class="mt-6 max-w-xl text-base text-grail-fog sm:text-lg md:mt-8 md:max-w-2xl md:text-xl md:text-white">
+        {site.name} is a strength and bodybuilding gym in southeast San
+        Antonio. Commercial-grade machines, 24/7 member access, and room to
+        train. Memberships start at {money(pricing.paidInFull.effectiveMonthly)}
+        a month paid in full.
+      </p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row md:mt-10">
+        <a href={site.joinUrl} class="btn btn-gold px-7 py-3.5 md:px-9 md:py-4 md:text-lg">
+          Sign Up at the Member Portal
+        </a>
+        <a href="#pricing" class="btn btn-outline px-7 py-3.5 md:px-9 md:py-4 md:text-lg">
+          See Membership Pricing
+        </a>
       </div>
-      <div class="card hidden overflow-hidden lg:block">
-        <img
-          src="/gym-floor.jpg"
-          alt="Gym floor at Grail Gym San Antonio with plate-loaded squat and hack squat machines"
-          width="1206"
-          height="1149"
-          class="h-full max-h-[70vh] w-full object-cover"
-          loading="eager"
-          fetchpriority="high"
-        />
-      </div>
+      <p class="mt-5 text-sm text-grail-fog md:text-base md:text-white/80">
+        Military rates from {money(pricing.militaryPaidInFull.effectiveMonthly)}/mo.
+        Day passes {money(pricing.dayPass.price)}.
+      </p>
     </div>
   </section>
 
@@ -362,8 +361,8 @@ const faqSchema = {
               <span class="mb-1 text-grail-fog">{pricing.paidInFull.period}</span>
             </div>
             <p class="mb-6 mt-3 text-sm leading-relaxed text-grail-fog">
-              {pricing.paidInFull.note} Saves {money(pricing.paidInFull.savingsVsDues)}
-              a year compared to month to month.
+              {pricing.paidInFull.note} Saves {money(pricing.paidInFull.savingsWithSignup)}
+              in year one compared to month to month.
             </p>
             <a
               href={site.planUrls.paidInFull}
@@ -462,7 +461,7 @@ const faqSchema = {
           > for more.
         </p>
 
-        <div class="mt-8 grid justify-items-center gap-4 sm:grid-cols-2">
+        <div class="mt-8 grid justify-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {
             site.instagramReels.map((url) => (
               <blockquote

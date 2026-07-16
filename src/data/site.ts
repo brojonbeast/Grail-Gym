@@ -24,6 +24,7 @@ export const site = {
   instagramReels: [
     "https://www.instagram.com/reel/DattliaNVFD/",
     "https://www.instagram.com/reel/DZtvOu6t-jJ/",
+    "https://www.instagram.com/reel/DZ0HDK2JnIt/",
   ],
   runClub: "https://www.instagram.com/grailrunclub",
   facebook: "https://www.facebook.com/share/1JfymF9Ecw/",
@@ -64,16 +65,17 @@ export const equipmentBrands = [
 
 /**
  * Membership pricing. Confirmed with owner. Do not change without sign-off.
- * Flat pricing — no signup fees are shown or charged (owner confirmed
- * 2026-07-16; the fee shown on the GymMaster portal is being removed).
- * Sales tax applies at checkout but is deliberately not mentioned on site.
+ * Month to month carries a $49.99 one-time signup fee (owner confirmed
+ * 2026-07-16); paid-in-full plans are flat. Sales tax applies at checkout
+ * but is deliberately not mentioned on site.
  */
 export const pricing = {
   monthToMonth: {
     label: "Month to Month",
     price: 49.99,
     period: "/mo",
-    note: "No contract.",
+    signupFee: 49.99,
+    note: "No contract. $49.99 one-time signup fee.",
   },
   sixMonth: {
     label: "6 Months, Paid in Full",
@@ -88,7 +90,8 @@ export const pricing = {
     period: "/year",
     effectiveMonthly: 40.0, // 480 / 12
     savingsVsDues: 119.88, // 12 × 49.99 − 480
-    note: "$40 per month.",
+    savingsWithSignup: 169.87, // (12 × 49.99 + 49.99) − 480
+    note: "$40 per month. No signup fee.",
   },
   military: {
     label: "Military",
