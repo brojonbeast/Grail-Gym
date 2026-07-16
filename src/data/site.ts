@@ -20,6 +20,11 @@ export const site = {
   email: "info@grailgymtx.com",
   instagram: "https://www.instagram.com/grailgym",
   instagramHandle: "@grailgym",
+  // Instagram reels embedded in the videos section (order = display order).
+  instagramReels: [
+    "https://www.instagram.com/reel/DattliaNVFD/",
+    "https://www.instagram.com/reel/DZtvOu6t-jJ/",
+  ],
   runClub: "https://www.instagram.com/grailrunclub",
   facebook: "https://www.facebook.com/share/1JfymF9Ecw/",
   reviews: "https://maps.app.goo.gl/4tunuwerZdsPjw1j9",
